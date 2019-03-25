@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+        function submitHistoryForm(parm) {
+            $('#history').append('<input type="hidden" id="paramId" name="hisKeyword" value="'+parm+'">');
+            $("#history").submit();
+            
+            }
+        </script>
+    </head>
+    <body>
+        <h3>You have searched the following in the past:</h3>
+        <form action="/showHistory" name="hisKeyword" id="history" method="POST">
+            <ul>
+                <% historyKeyword.forEach(result=>{%>
+                    <!-- <input type="hidden" name="hisKeyword" value="<%= result.searchKeyword%>">  -->
+                    <li><a href="#" onclick="submitHistoryForm('<%=result.searchKeyword%>');event.preventDefault();"><%= result.searchKeyword%></a></li>
+                <%});%>
+            </ul><br><br><br>   
+        </form>
+    </body>
+</html>
